@@ -170,7 +170,9 @@ class KNearestNeighbor(object):
       # np argsort done on the ith row of dists
       # argsort return array of positions that item at an index would be in if array was sorted
       # how do I get the k-smallest distances tho?
-      closest_y = self.y_train[np.argsort(dists[i,:])[:k]]
+      # closest_y = self.y_train[np.argsort(dists[i,:])[:k]]
+      y_indicies = np.argsort(dists[i, :], axis = 0)
+      closest_y = self.y_train[y_indicies[:k]]
       
       #########################################################################
       # TODO:                                                                 #
