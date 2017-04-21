@@ -60,7 +60,7 @@ def main():
              X_data[i,44] = curr_wav_fft[5000].real[0]
              X_data[i,45] = curr_wav_fft[5000].real[1]
              i += 1
-    print(X_data)
+    print(X_data.shape)
 
 
 if __name__ == '__main__': # Main function
