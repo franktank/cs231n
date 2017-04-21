@@ -189,7 +189,13 @@ def main():
 
         # Decay learning rate
         learning_rate *= lrdecay
-    
+    print(W1)
+    # aah
+    X_test = X[5]
+    hidden_layer = np.maximum(0, np.dot(X_test, W1) + b1) # note, ReLU activation
+    scores = np.dot(hidden_layer, W2) + b2
+    y_pred = np.argmax(scores)
+    print(y_pred)
 
 
 
