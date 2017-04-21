@@ -10,9 +10,10 @@ def get_data():
     i = 0
     for fn in os.listdir('../../phonemes-wav/'):
          if (fn != '.DS_Store'):
-             print("../../phonemes-wav/" + fn)
+            #  print("../../phonemes-wav/" + fn)
              wav1, wav2 = wavfile.read("../../phonemes-wav/" + fn)
              Y_label[i] = i
+            #  print(wav2)
              curr_wav_fft = fft(wav2)
              X_data[i,0] = curr_wav_fft[75].real[0]
              X_data[i,1] = curr_wav_fft[75].real[1]
@@ -61,7 +62,7 @@ def get_data():
              X_data[i,44] = curr_wav_fft[5000].real[0]
              X_data[i,45] = curr_wav_fft[5000].real[1]
              i += 1
-    print(X_data.shape)
+    # print(X_data.shape)
     return X_data, Y_label
 
 def main():
@@ -70,7 +71,7 @@ def main():
     # Number of dimensions
     D = 46
     # Size of hidden layer
-    H = 10
+    H = 100
     # Number of inputs(???)
     I = 0
 
@@ -169,8 +170,8 @@ def main():
       W2 += -learning_rate * grads['W2']
       b2 += -learning_rate * grads['b2']
 
-      if it % 100 == 0:
-        print('iteration %d / %d: loss %f' % (it, num_iters, loss))
+    #   if it % 100 == 0:
+        # print('iteration %d / %d: loss %f' % (it, num_iters, loss))
 
       # Every epoch, check train and val accuracy and decay learning rate.
       if it % iterations_per_epoch == 0:
@@ -189,16 +190,74 @@ def main():
 
         # Decay learning rate
         learning_rate *= lrdecay
-    print(W1)
+    # print(W1)
     # aah
     X_test = X[5]
     hidden_layer = np.maximum(0, np.dot(X_test, W1) + b1) # note, ReLU activation
     scores = np.dot(hidden_layer, W2) + b2
     y_pred = np.argmax(scores)
+    # print(y_pred)
+    yo1, yo2 = wavfile.read("../../words/sty.wav")
+    # print(yo2)
+    # print("LOL")
+    test_dataa = np.ones(shape=(1,46),dtype=np.int8)
+    curr_wav_fft = fft(yo2)
+    # print (curr_wav_fft.shape)
+    # print(test_dataa.shape)
+    # print(curr_wav_fft[75])
+    # print(test_dataa[0,0])
+    test_dataa[0,0] = curr_wav_fft[75].real
+    test_dataa[0,1] = curr_wav_fft[75].real
+    test_dataa[0,2] = curr_wav_fft[100].real
+    test_dataa[0,3] = curr_wav_fft[100].real
+    test_dataa[0,4] = curr_wav_fft[200].real
+    test_dataa[0,5] = curr_wav_fft[200].real
+    test_dataa[0,6] = curr_wav_fft[300].real
+    test_dataa[0,7] = curr_wav_fft[300].real
+    test_dataa[0,8] = curr_wav_fft[400].real
+    test_dataa[0,9] = curr_wav_fft[400].real
+    test_dataa[0,10] = curr_wav_fft[600].real
+    test_dataa[0,11] = curr_wav_fft[600].real
+    test_dataa[0,12] = curr_wav_fft[800].real
+    test_dataa[0,13] = curr_wav_fft[800].real
+    test_dataa[0,14] = curr_wav_fft[1000].real
+    test_dataa[0,15] = curr_wav_fft[1000].real
+    test_dataa[0,16] = curr_wav_fft[1200].real
+    test_dataa[0,17] = curr_wav_fft[1200].real
+    test_dataa[0,18] = curr_wav_fft[1400].real
+    test_dataa[0,19] = curr_wav_fft[1400].real
+    test_dataa[0,20] = curr_wav_fft[1600].real
+    test_dataa[0,21] = curr_wav_fft[1600].real
+    test_dataa[0,22] = curr_wav_fft[1800].real
+    test_dataa[0,23] = curr_wav_fft[1800].real
+    test_dataa[0,24] = curr_wav_fft[2000].real
+    test_dataa[0,25] = curr_wav_fft[2000].real
+    test_dataa[0,26] = curr_wav_fft[2200].real
+    test_dataa[0,27] = curr_wav_fft[2200].real
+    test_dataa[0,28] = curr_wav_fft[2400].real
+    test_dataa[0,29] = curr_wav_fft[2400].real
+    test_dataa[0,30] = curr_wav_fft[2600].real
+    test_dataa[0,31] = curr_wav_fft[2600].real
+    test_dataa[0,32] = curr_wav_fft[2800].real
+    test_dataa[0,33] = curr_wav_fft[2800].real
+    test_dataa[0,34] = curr_wav_fft[3000].real
+    test_dataa[0,35] = curr_wav_fft[3000].real
+    test_dataa[0,36] = curr_wav_fft[3200].real
+    test_dataa[0,37] = curr_wav_fft[3200].real
+    test_dataa[0,38] = curr_wav_fft[3500].real
+    test_dataa[0,39] = curr_wav_fft[3500].real
+    test_dataa[0,40] = curr_wav_fft[4000].real
+    test_dataa[0,41] = curr_wav_fft[4000].real
+    test_dataa[0,42] = curr_wav_fft[4500].real
+    test_dataa[0,43] = curr_wav_fft[4500].real
+    test_dataa[0,44] = curr_wav_fft[5000].real
+    test_dataa[0,45] = curr_wav_fft[5000].real
+    hidden_layer = np.maximum(0, np.dot(test_dataa, W1) + b1) # note, ReLU activation
+    scores = np.dot(hidden_layer, W2) + b2
+    y_pred = np.argmax(scores)
     print(y_pred)
-
-
-
+    phonemes = ['aah', 'ahh', 'arr', 'au', 'aww', 'ay', 'aye', 'ch', 'd', 'ee', 'eh', 'err', 'ewe', 'ff', 'g', 'hh', 'hw', 'ih', 'jj', 'k', 'kss', 'll', 'mm', 'nn', 'nng', 'ohh', 'oo', 'ooo', 'oww', 'oy', 'pp', 'qu', 'rr', 'shh', 'ss', 'th', 'tt', 'uh', 'vvv', 'wuh', 'yyuh', 'zh', 'zzz']
+    print(phonemes[y_pred])
 
 if __name__ == '__main__': # Main function
     main()
