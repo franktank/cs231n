@@ -75,7 +75,8 @@ def main():
     I = 0
 
     reg = 1e-5 # 0.05?
-    learning_rate = .001
+    # learning_rate = .02
+    learning_rate = .1
     lrdecay = .95
     num_iters = 10000
 
@@ -167,9 +168,6 @@ def main():
       b1 += -learning_rate * grads['b1']
       W2 += -learning_rate * grads['W2']
       b2 += -learning_rate * grads['b2']
-      #########################################################################
-      #                             END OF YOUR CODE                          #
-      #########################################################################
 
       if it % 100 == 0:
         print('iteration %d / %d: loss %f' % (it, num_iters, loss))
@@ -191,7 +189,10 @@ def main():
 
         # Decay learning rate
         learning_rate *= lrdecay
-        
+    
+
+
+
 
 if __name__ == '__main__': # Main function
     main()
